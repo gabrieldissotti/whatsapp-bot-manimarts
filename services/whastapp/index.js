@@ -1,2 +1,2 @@
 
-export { sendMessageByTemplate } from './messages'
+export { sendMessageByTemplate, sendAudioMessage } from './messages'

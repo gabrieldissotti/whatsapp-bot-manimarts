@@ -6,8 +6,8 @@ const nextConfig = {
       apiVersion: process.env.GRAPH_FACEBOOK_VERSION,
       senderPhoneNumber: process.env.GRAPH_FACEBOOK_PHONE,
       accessToken: process.env.GRAPH_FACEBOOK_ACCESS_TOKEN
-    }
-
+    },
+    filesBaseURL: process.env.FILES_BASE_URL
   }
 }
 
