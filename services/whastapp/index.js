@@ -1,0 +1,2 @@
+
+export { sendMessageByTemplate } from './messages'
