@@ -37,6 +37,8 @@ export default async function handler(req, res) {
         return res.status(403).json({ err: 'verify tokens do not match' });
       }
     }
+
+    return res.status(403).json({ err: 'modem and token not defined' });
   }
 }
 
