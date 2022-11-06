@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ success: true });
   } else {
-    const verify_token = "TOKEN-WHSTAAP_B_MANIMARTS_TEST";
+    const verify_token = "token123gabes";
 
     // Parse params from the webhook verification request
     let mode = req.query["hub.mode"];
