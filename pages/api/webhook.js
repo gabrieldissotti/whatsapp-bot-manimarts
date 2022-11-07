@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   console.log(req.query)
   if (req.method === 'POST') {
     if (!req.body?.object) {
-      return res.status(404), json({ error: 'req.body?.object not present' });
+      return res.status(404).json({ error: 'req.body?.object not present' });
     }
 
     if (req.body?.entry[0]?.changes[0]?.value?.messages[0]) {
