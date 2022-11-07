@@ -12,9 +12,13 @@ export default async function handler(req, res) {
     }
 
     if (req.body?.entry[0]?.changes[0]?.value?.messages[0]) {
-      const phoneNumberId = req.body.entry[0].changes[0].value.metadata.phone_number_id;
-      const from = req.body.entry[0].changes[0].value.messages[0].from;
-      const message = req.body.entry[0].changes[0].value.messages[0].text.body;
+      const { value } = req.body.entry[0].changes[0]
+
+      const phoneNumberId = value?.metadata?.phone_number_id;
+      const from = value.messages[0]?.from;
+      const message = value.messages[0]?.text?.body;
+
+      if (!from) return res.status(200).json({ error: 'phone number is not present in webhook payload' });
 
       console.log({
         phoneNumberId,
@@ -31,6 +35,8 @@ export default async function handler(req, res) {
       await sendAudioMessage(from, actualAudio)
 
       clientStage[from]++
+
+      console.log('clientStage', clientStage)
 
       return res.status(200).json({ success: true });
     }
