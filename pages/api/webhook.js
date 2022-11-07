@@ -1,12 +1,12 @@
 export default async function handler(req, res) {
-  if(req.method === 'POST') {
+  if (req.method === 'POST') {
     if (!req.body?.object) {
-      return res.status(404),json({ error: 'req.body?.object not present' });
+      return res.status(404), json({ error: 'req.body?.object not present' });
     }
 
     if (req.body?.entry[0]?.changes[0]?.value?.messages[0]) {
       const phone_number_id = req.body.entry[0].changes[0].value.metadata.phone_number_id;
-      const from = req.body.entry[0].changes[0].value.messages[0].from; 
+      const from = req.body.entry[0].changes[0].value.messages[0].from;
       const msg_body = req.body.entry[0].changes[0].value.messages[0].text.body;
 
       console.log({
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       if (mode === "subscribe" && token === verify_token) {
         // Respond with 200 OK and challenge token from the request
         console.log("WEBHOOK_VERIFIED");
-        res.status(200).send(challenge);
+        return res.status(200).json(challenge);
       } else {
         // Responds with '403 Forbidden' if verify tokens do not match
         return res.status(403).json({ err: 'verify tokens do not match' });
