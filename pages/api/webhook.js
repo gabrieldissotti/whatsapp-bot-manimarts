@@ -1,5 +1,5 @@
 import { sendAudioMessage } from '../../services/whastapp'
-import wppAudiosEnum from '../../enums/whastappAudios.enum'
+import audios from '../../enums/whastappAudios.enum'
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -18,7 +18,6 @@ export default async function handler(req, res) {
         message
       })
 
-      const audios = Object.values(wppAudiosEnum)
       const randomAudio = audios[Math.floor(Math.random() * audios.length)];
 
       await sendAudioMessage(recipientPhoneNumber, randomAudio)

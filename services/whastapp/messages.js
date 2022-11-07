@@ -1,10 +1,10 @@
 import httpClient from './httpClient'
 import getConfig from 'next/config';
 
-const { 
-  serverRuntimeConfig: {
-    filesBaseURL 
-  }
+const {
+    serverRuntimeConfig: {
+        filesBaseURL
+    }
 } = getConfig()
 
 export async function sendMessageByTemplate(template, recipientPhoneNumber) {
@@ -24,7 +24,7 @@ export async function sendMessageByTemplate(template, recipientPhoneNumber) {
     return response
 }
 
-export async function sendAudioMessage(recipientPhoneNumber, audio) { 
+export async function sendAudioMessage(recipientPhoneNumber, audio) {
     console.log({
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
