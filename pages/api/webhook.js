@@ -4,6 +4,8 @@ import audios from '../../constants/audios'
 const clientStage = {}
 
 export default async function handler(req, res) {
+  console.log(req.body)
+  console.log(req.query)
   if (req.method === 'POST') {
     if (!req.body?.object) {
       return res.status(404), json({ error: 'req.body?.object not present' });
