@@ -1,3 +1,6 @@
+import { sendAudioMessage } from '../../../../services/whastapp'
+import wppAudiosEnum from '../../enums/whastappAudios.enum'
+
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     if (!req.body?.object) {
@@ -5,15 +8,23 @@ export default async function handler(req, res) {
     }
 
     if (req.body?.entry[0]?.changes[0]?.value?.messages[0]) {
-      const phone_number_id = req.body.entry[0].changes[0].value.metadata.phone_number_id;
+      const recipientPhoneNumber = req.body.entry[0].changes[0].value.metadata.phone_number_id;
       const from = req.body.entry[0].changes[0].value.messages[0].from;
-      const msg_body = req.body.entry[0].changes[0].value.messages[0].text.body;
+      const message = req.body.entry[0].changes[0].value.messages[0].text.body;
 
       console.log({
-        phone_number_id,
+        recipientPhoneNumber,
         from,
-        msg_body
+        message
       })
+
+
+      const audios = Object.values(wppAudiosEnum['1_salvei_seu_contato'])
+      const randomAudio = audios[Math.floor(Math.random() * audios.length)];
+
+      await sendAudioMessage(recipientPhoneNumber, randomAudio)
+
+      return res.status(200).json({ success: true, recipientPhoneNumber, audio: randomAudio });
     }
 
     return res.status(200).json({ success: true });
