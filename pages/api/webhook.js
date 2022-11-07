@@ -11,7 +11,7 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: 'req.body?.object not present' });
     }
 
-    if (req.body?.entry[0]?.changes[0]?.value?.messages[0]) {
+    if (req.body?.entry[0]?.changes[0]?.value?.messages) {
       const { value } = req.body.entry[0].changes[0]
 
       const phoneNumberId = value?.metadata?.phone_number_id;
