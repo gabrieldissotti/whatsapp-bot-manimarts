@@ -1,5 +1,5 @@
 import { sendAudioMessage } from '../../services/whastapp'
-import audios from '../../enums/whastappAudios.enum'
+import audios from '../../constants/audios'
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
