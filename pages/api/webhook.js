@@ -1,6 +1,8 @@
 import { sendAudioMessage } from '../../services/whastapp'
 import audios from '../../constants/audios'
 
+const clientStage = {}
+
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     if (!req.body?.object) {
@@ -18,11 +20,17 @@ export default async function handler(req, res) {
         message
       })
 
-      const randomAudio = audios[Math.floor(Math.random() * audios.length)];
+      if (!clientStage[from]) {
+        clientStage[from] = 0
+      }
 
-      await sendAudioMessage(from, randomAudio)
+      const actualAudio = audios[clientStage[from]]
 
-      return res.status(200).json({ success: true, recipientPhoneNumber: from, audio: randomAudio });
+      await sendAudioMessage(from, actualAudio)
+
+      clientStage[from]++
+
+      return res.status(200).json({ success: true });
     }
 
     return res.status(200).json({ success: true });

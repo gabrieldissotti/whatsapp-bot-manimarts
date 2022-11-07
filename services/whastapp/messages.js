@@ -25,17 +25,7 @@ export async function sendMessageByTemplate(template, recipientPhoneNumber) {
 }
 
 export async function sendAudioMessage(recipientPhoneNumber, audio) {
-    console.log({
-        "messaging_product": "whatsapp",
-        "recipient_type": "individual",
-        "to": recipientPhoneNumber,
-        "type": "audio",
-        "audio": {
-            "link": `${filesBaseURL}/audio/${audio}.ogg"`
-        }
-    })
-
-    const response = await httpClient.post('/messages', {
+    await httpClient.post('/messages', {
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
         "to": recipientPhoneNumber,
@@ -45,5 +35,4 @@ export async function sendAudioMessage(recipientPhoneNumber, audio) {
         }
     })
 
-    return response
 }
