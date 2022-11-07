@@ -4,7 +4,7 @@ import audios from '../../constants/audios'
 const clientStage = {}
 
 export default async function handler(req, res) {
-  console.log(req.body)
+  console.log(JSON.stringify(req.body))
   console.log(req.query)
   if (req.method === 'POST') {
     if (!req.body?.object) {
