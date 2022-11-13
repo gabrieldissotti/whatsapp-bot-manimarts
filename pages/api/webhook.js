@@ -1,71 +1,16 @@
-import { sendAudioMessage } from '../../services/whastapp'
-import audios from '../../constants/audios'
-
-const clientStage = {}
+import {
+  handleReplayLead,
+  handleVerifyWebhook,
+} from '../../core/controllers/webhookController';
 
 export default async function handler(req, res) {
-  console.log(JSON.stringify(req.body))
-  console.log(req.query)
-  if (req.method === 'POST') {
-    if (!req.body?.object) {
-      return res.status(404).json({ error: 'req.body?.object not present' });
-    }
+  switch (req.method) {
+    case 'POST':
+      handleReplayLead(req, res);
+      break;
 
-    if (req.body?.entry[0]?.changes[0]?.value?.messages) {
-      const { value } = req.body.entry[0].changes[0]
-
-      const phoneNumberId = value?.metadata?.phone_number_id;
-      const from = value.messages[0]?.from;
-      const message = value.messages[0]?.text?.body;
-
-      if (!from) return res.status(200).json({ error: 'phone number is not present in webhook payload' });
-
-      console.log({
-        phoneNumberId,
-        from,
-        message
-      })
-
-      if (!clientStage[from]) {
-        clientStage[from] = 0
-      }
-
-      const actualAudio = audios[clientStage[from]]
-
-      await sendAudioMessage(from, actualAudio)
-
-      clientStage[from]++
-
-      console.log('clientStage', clientStage)
-
-      return res.status(200).json({ success: true });
-    }
-
-    return res.status(200).json({ success: true });
-  } else {
-    const verify_token = "token123gabes";
-
-    // Parse params from the webhook verification request
-    let mode = req.query["hub.mode"];
-    let token = req.query["hub.verify_token"];
-    let challenge = req.query["hub.challenge"];
-
-    // Check if a token and mode were sent
-    if (mode && token) {
-      // Check the mode and token sent are correct
-      if (mode === "subscribe" && token === verify_token) {
-        // Respond with 200 OK and challenge token from the request
-        console.log("WEBHOOK_VERIFIED");
-        return res.status(200).send(challenge);
-      } else {
-        // Responds with '403 Forbidden' if verify tokens do not match
-        return res.status(403).json({ err: 'verify tokens do not match' });
-      }
-    }
-
-    return res.status(403).json({ err: 'modem and token not defined' });
+    default:
+      handleVerifyWebhook(req, res);
+      break;
   }
 }
-
-
-// info on WhatsApp text message payload: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#text-messages

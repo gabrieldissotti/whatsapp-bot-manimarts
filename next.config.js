@@ -5,12 +5,16 @@ const nextConfig = {
     graphFacebookConfig: {
       apiVersion: process.env.GRAPH_FACEBOOK_VERSION,
       senderPhoneNumber: process.env.GRAPH_FACEBOOK_PHONE,
-      accessToken: process.env.GRAPH_FACEBOOK_ACCESS_TOKEN
+      accessToken: process.env.GRAPH_FACEBOOK_ACCESS_TOKEN,
+      webhookAccessToken: process.env.GRAPH_FACEBOOK_WEBHOOK_ACCESS_TOKEN,
     },
-    filesBaseURL: process.env.FILES_BASE_URL
-  }
-}
+    filesBaseURL: process.env.FILES_BASE_URL,
+    database: {
+      mongodbDSN: process.env.MONGODB_DSN,
+    },
+  },
+};
 
-console.log(nextConfig)
+console.log(nextConfig);
 
-module.exports = nextConfig
+module.exports = nextConfig;
