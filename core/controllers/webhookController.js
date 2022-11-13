@@ -1,7 +1,7 @@
 import getConfig from 'next/config';
-import { leadsService } from '../services';
-import { leadsRepository, scriptsRepository } from '../repositories';
-import {} from '../../infra/databases/mongodb/client';
+import LeadsService from '../services/LeadsService';
+import { LeadsRepository, ScriptsRepository } from '../repositories';
+import connection from '../../infra/databases/mongodb/client';
 
 const {
   serverRuntimeConfig: {
@@ -10,34 +10,45 @@ const {
 } = getConfig();
 
 export async function handleReplayLead(req, res) {
-  if (!req.body?.object) {
-    return res.status(404).json({ error: 'req.body?.object not present' });
-  }
-
-  if (!req.body?.entry[0]?.changes[0]?.value?.messages) {
-    return res
-      .status(200)
-      .json({ error: 'does not have any message in payload, skipping' });
-  }
-  console.log('webhook with messages payload:', JSON.stringify(req.body));
-  return res.status(200, { body: req.body });
-
-  const recipientPhoneNumber = req.body.entry[0].changes[0].messages[0]?.from;
-  if (!recipientPhoneNumber) {
-    return res
-      .status(200)
-      .json({ error: 'phone number not found in request payload' });
-  }
-
-  const service = leadsService({ leadsRepository, scriptsRepository });
-
   try {
-    await service.replyLead({
+    console.log('REQUEST PAYLOAD:', JSON.stringify(req.body));
+
+    if (!req.body?.object) {
+      return res.status(404).json({ error: 'req.body?.object not present' });
+    }
+
+    if (!req.body?.entry[0]?.changes[0]?.value?.messages) {
+      return res
+        .status(200)
+        .json({ error: 'does not have any message in payload, skipping' });
+    }
+
+    const recipientPhoneNumber =
+      req.body.entry[0].changes[0]?.value?.messages[0]?.from;
+
+    if (!recipientPhoneNumber) {
+      return res
+        .status(200)
+        .json({ error: 'phone number not found in request payload' });
+    }
+
+    const leadsRepository = new LeadsRepository({ connection });
+    const scriptsRepository = new ScriptsRepository({ connection });
+    const leadsService = new LeadsService({
+      leadsRepository,
+      scriptsRepository,
+    });
+
+    await leadsService.replyLead({
       recipientPhoneNumber,
     });
-    return res.status(200, { success: true });
+
+    return res.status(200).json({ success: true });
   } catch (error) {
-    return res.status(200, { error });
+    return res.status(200).json({
+      error: 'failed to reply lead request in controller',
+      serviceError: error.message,
+    });
   }
 }
 

@@ -4,9 +4,7 @@ import getConfig from 'next/config';
 
 const {
   serverRuntimeConfig: {
-    database: {
-      mongodbDSN,
-    },
+    database: { mongodbDSN },
   },
 } = getConfig();
 

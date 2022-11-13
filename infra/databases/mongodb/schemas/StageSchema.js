@@ -1,10 +1,12 @@
-import mongoose from 'mongoose';
+import { Schema } from 'mongoose';
 import MediaSchema from './MediaSchema';
 
-const { Schema } = mongoose;
-
 const Stage = new Schema({
-  _id: Schema.ObjectId,
+  _id: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    auto: true,
+  },
   message: {
     medias: [MediaSchema],
     text: String,

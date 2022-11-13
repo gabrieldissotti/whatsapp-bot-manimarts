@@ -1,17 +1,22 @@
-import mongoose from 'mongoose';
+import { Schema } from 'mongoose';
+import { DEFAULT_SCRIPT_VERSION } from '../../../../core/constants/scripts';
 import StageSchema from './StageSchema';
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema;
-
-const Script = new Schema({
-  _id: ObjectId,
-  stages: [StageSchema],
-  createdAt: Date,
-  version: {
-    type: String,
-    default: '1.0.0',
+const Script = new Schema(
+  {
+    _id: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      auto: true,
+    },
+    stages: [StageSchema],
+    createdAt: Date,
+    version: {
+      type: String,
+      default: DEFAULT_SCRIPT_VERSION,
+    },
   },
-});
+  { collection: 'scripts' }
+);
 
 export default Script;

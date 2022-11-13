@@ -1,10 +1,11 @@
-import mongoose from 'mongoose';
-
-const { Schema } = mongoose;
-const { ObjectId } = Schema;
+import { Schema } from 'mongoose';
 
 const Media = new Schema({
-  _id: ObjectId,
+  _id: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    auto: true,
+  },
   url: {
     type: String,
     required: true,

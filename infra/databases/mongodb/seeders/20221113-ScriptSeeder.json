@@ -1,0 +1,136 @@
+{
+  "_id": {
+    "$oid": "6370f03cfa36f0a8a0b75ddb"
+  },
+  "stages": [
+    {
+      "_id": {
+        "$oid": "6370f06d93b4892dc7dc94c2"
+      },
+      "message": {
+        "template": "boas_vindas"
+      },
+      "position": 0
+    },
+    {
+      "_id": {
+        "$oid": "6370f48e98ad0f0005e44365"
+      },
+      "message": {
+        "medias": [
+          {
+            "_id": {
+              "$oid": "6370f491d8e44b59caf20b92"
+            },
+            "url": "/audio/1_salvei_seu_contato.ogg",
+            "type": "audio"
+          }
+        ]
+      },
+      "position": 1
+    },
+    {
+      "_id": {
+        "$oid": "6370f4173ebbb0965b504294"
+      },
+      "message": {
+        "medias": [
+          {
+            "_id": {
+              "$oid": "6370f42117ee21bad02cc86d"
+            },
+            "url": "/audio/2_voce_tem_foto_de_algum.ogg",
+            "type": "audio"
+          }
+        ]
+      },
+      "position": 2
+    },
+    {
+      "_id": {
+        "$oid": "6370f429f55f9a4a6c5451b0"
+      },
+      "message": {
+        "medias": [
+          {
+            "_id": {
+              "$oid": "6370f42bcca7fb5616e898ce"
+            },
+            "url": "/audio/3_a_nao_tudo_bem_posso_mandar_uns_meus.ogg",
+            "type": "audio"
+          }
+        ]
+      },
+      "position": 3
+    },
+    {
+      "_id": {
+        "$oid": "6370f43700418d91ac5c05cb"
+      },
+      "message": {
+        "medias": [
+          {
+            "_id": {
+              "$oid": "6370f43ad488cb9e4a415c31"
+            },
+            "url": "/audio/4_mas_eai_vc_tem_vontade_de_aprender.ogg",
+            "type": "audio"
+          }
+        ]
+      },
+      "position": 4
+    },
+    {
+      "_id": {
+        "$oid": "6370f4478e6bbe8a5e1ecd4b"
+      },
+      "message": {
+        "medias": [
+          {
+            "_id": {
+              "$oid": "6370f44ddc18fd899aeb96fe"
+            },
+            "url": "/audio/5_se_vc_realmente_quer_criei_um_treinamento.ogg",
+            "type": "audio"
+          }
+        ]
+      },
+      "position": 5
+    },
+    {
+      "_id": {
+        "$oid": "6370f458f1464772739dbdd6"
+      },
+      "message": {
+        "medias": [
+          {
+            "_id": {
+              "$oid": "6370f45e5dd9d51e8eb5e6c0"
+            },
+            "url": "/audio/6_pra_vc_participar_faca_a_inscricao.ogg",
+            "type": "audio"
+          }
+        ]
+      },
+      "position": 6
+    },
+    {
+      "_id": {
+        "$oid": "6370f4671522e641c8a40a2f"
+      },
+      "message": {
+        "medias": [
+          {
+            "_id": {
+              "$oid": "6370f46b71c6525e92f5fbd2"
+            },
+            "url": "/audio/7_vou_segurar_uma_vaga_pra_vc.ogg",
+            "type": "audio"
+          }
+        ]
+      },
+      "position": 7
+    }
+  ],
+  "createdAt": "2022-11-13T14:15:16.401Z"
+}
