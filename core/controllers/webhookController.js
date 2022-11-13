@@ -19,7 +19,7 @@ export async function handleReplayLead(req, res) {
       .status(200)
       .json({ error: 'does not have any message in payload, skipping' });
   }
-  console.log('webhook with messages payload:', req.body);
+  console.log('webhook with messages payload:', JSON.stringify(req.body));
   return res.status(200, { body: req.body });
 
   const recipientPhoneNumber = req.body.entry[0].changes[0].messages[0]?.from;
