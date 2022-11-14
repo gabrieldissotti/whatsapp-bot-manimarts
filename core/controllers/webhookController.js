@@ -7,7 +7,7 @@ class WebhookController {
     this.logger = logger;
   }
 
-  async handleReplayLead(req, res) {
+  async handleWebhook(req, res) {
     try {
       this.logger.child({ body: req.body }).info('request payload');
 
@@ -30,8 +30,12 @@ class WebhookController {
           .json({ error: 'phone number not found in request payload' });
       }
 
+      const messageGiven =
+        req.body.entry[0].changes[0].value.messages[0]?.text?.body;
+
       await this.leadsService.replyLead({
         recipientPhoneNumber,
+        messageGiven,
       });
 
       return res.status(200).json({ success: true });

@@ -1,3 +1,5 @@
+const { MESSAGE_TO_START_SCRIPT } = require('../constants/scripts');
+
 class LeadsService {
   constructor({
     leadsRepository,
@@ -11,7 +13,7 @@ class LeadsService {
     this.logger = logger;
   }
 
-  async replyLead({ recipientPhoneNumber }) {
+  async replyLead({ recipientPhoneNumber, messageGiven }) {
     if (!recipientPhoneNumber)
       throw new Error('phone number is not present in webhook payload');
 
@@ -25,6 +27,12 @@ class LeadsService {
       } else {
         logger.info('lead not found');
         isFirstContact = true;
+
+        if (messageGiven !== MESSAGE_TO_START_SCRIPT) {
+          logger.info('lead not qualified to start bot script, skipping');
+          return;
+        }
+
         lead = this.leadsRepository.createLead({
           phoneNumber: recipientPhoneNumber,
           name: 'Unnamed yet',
