@@ -66,7 +66,7 @@ class LeadsService {
           `LeadsService: {phone: ${recipientPhoneNumber}} | sending first text message`
         );
         await this.whatsAppBusinessCloudAPI.sendMessageByTemplate(
-          nextStage.template,
+          nextStage.message.template,
           recipientPhoneNumber
         );
       } else {
