@@ -38,7 +38,9 @@ class LeadsService {
       if (!scriptStages) {
         throw new Error('no script found in database to get stages');
       }
-      logger.child({ totalScripts: scriptStages.length }).info('scripts found');
+      logger
+        .child({ totalStages: scriptStages.length })
+        .info('script stages found');
 
       let nextStage = scriptStages[0];
       if (!isFirstContact) {
@@ -46,7 +48,7 @@ class LeadsService {
           (stage) => stage.position === lead.stage_position + 1
         );
 
-        if (nextStage.position > scriptStages.length) {
+        if (!nextStage) {
           logger.info('Script ends, skipping message webhook');
           return;
         }
