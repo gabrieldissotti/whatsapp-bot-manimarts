@@ -32,14 +32,16 @@ async function getConnection() {
       bufferCommands: false,
     };
 
+    console.log('MONGODB: starting new connection');
     cached.promise = mongoose
       .connect(MONGODB_URI, opts)
       .then((mongooseConnection) => mongooseConnection);
   }
 
   try {
-    console.log('MONGODB: starting new connection');
+    console.log('MONGODB: waiting for connection');
     cached.conn = await cached.promise;
+    console.log('MONGODB: connected');
   } catch (e) {
     cached.promise = null;
     throw e;
