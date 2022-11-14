@@ -30,6 +30,9 @@ class LeadsService {
           name: 'Unnamed yet',
           stagePosition: 0,
         });
+        console.log(
+          `LeadsService: {phone: ${recipientPhoneNumber}} | lead created successfully`
+        );
       }
 
       const scriptStages = await this.scriptsRepository.getStages();
@@ -52,7 +55,13 @@ class LeadsService {
         );
       }
 
-      if (nextStage?.template) {
+      console.log(
+        `LeadsService: {phone: ${recipientPhoneNumber}} | actual stage ${JSON.stringify(
+          nextStage
+        )}º`
+      );
+
+      if (nextStage?.message?.template) {
         console.log(
           `LeadsService: {phone: ${recipientPhoneNumber}} | sending first text message`
         );
@@ -60,9 +69,13 @@ class LeadsService {
           nextStage.template,
           recipientPhoneNumber
         );
+      } else {
+        console.log(
+          `LeadsService: {phone: ${recipientPhoneNumber}} | stage does not have message by template, skipping`
+        );
       }
 
-      nextStage?.medias?.map(async ({ type, url }) => {
+      nextStage?.message?.medias?.map(async ({ type, url }) => {
         console.log(
           `LeadsService: {phone: ${recipientPhoneNumber}} | sending media in ${nextStage.position}º stage | {media: ${url}}`
         );
@@ -78,6 +91,11 @@ class LeadsService {
             break;
         }
       });
+      if (!nextStage?.message?.medias?.length) {
+        console.log(
+          `LeadsService: {phone: ${recipientPhoneNumber}} | stage does not have any media message, skipping`
+        );
+      }
 
       await this.leadsRepository.updateLead({
         phoneNumber: recipientPhoneNumber,
