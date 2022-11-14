@@ -1,12 +1,12 @@
-import {
-  sendAudioMessage,
-  sendMessageByTemplate,
-} from '../../infra/apis/WhatsAppBusinessCloudAPI';
-
-export default class LeadsService {
-  constructor({ leadsRepository, scriptsRepository }) {
+class LeadsService {
+  constructor({
+    leadsRepository,
+    scriptsRepository,
+    whatsAppBusinessCloudAPI,
+  }) {
     this.leadsRepository = leadsRepository;
     this.scriptsRepository = scriptsRepository;
+    this.whatsAppBusinessCloudAPI = whatsAppBusinessCloudAPI;
   }
 
   async replyLead({ recipientPhoneNumber }) {
@@ -38,13 +38,19 @@ export default class LeadsService {
       }
 
       if (nextStage?.template) {
-        await sendMessageByTemplate(nextStage.template, recipientPhoneNumber);
+        await this.whatsAppBusinessCloudAPI.sendMessageByTemplate(
+          nextStage.template,
+          recipientPhoneNumber
+        );
       }
 
       nextStage?.medias?.map(async ({ type, url }) => {
         switch (type) {
           case 'audio':
-            await sendAudioMessage(recipientPhoneNumber, url);
+            await this.whatsAppBusinessCloudAPI.sendAudioMessage(
+              recipientPhoneNumber,
+              url
+            );
             break;
 
           default:
@@ -62,3 +68,5 @@ export default class LeadsService {
     }
   }
 }
+
+module.exports = LeadsService;

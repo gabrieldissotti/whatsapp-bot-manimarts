@@ -1,9 +1,11 @@
-import { sendMessageByTemplate } from '../../../../infra/apis/WhatsAppBusinessCloudAPI';
+const {
+  sendMessageByTemplate,
+} = require('../../../../infra/apis/WhatsAppBusinessCloudAPI/messages');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const { recipientPhoneNumber, template } = req.query;
 
   await sendMessageByTemplate(template, recipientPhoneNumber);
 
   return res.status(200).json({ sent: true, recipientPhoneNumber });
-}
+};

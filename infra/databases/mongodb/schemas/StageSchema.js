@@ -1,5 +1,5 @@
-import { Schema } from 'mongoose';
-import MediaSchema from './MediaSchema';
+const { Schema } = require('mongoose');
+const MediaSchema = require('./MediaSchema');
 
 const Stage = new Schema({
   _id: {
@@ -18,4 +18,4 @@ const Stage = new Schema({
   },
 });
 
-export default Stage;
+module.exports = Stage;

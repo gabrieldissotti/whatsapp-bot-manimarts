@@ -1,16 +1,13 @@
-import {
-  handleReplayLead,
-  handleVerifyWebhook,
-} from '../../core/controllers/webhookController';
+module.exports = async function handler(req, res) {
+  const { webhookController } = req.controllers;
 
-export default async function handler(req, res) {
   switch (req.method) {
     case 'POST':
-      handleReplayLead(req, res);
+      webhookController.handleReplayLead(req, res);
       break;
 
     default:
-      handleVerifyWebhook(req, res);
+      webhookController.handleVerifyWebhook(req, res);
       break;
   }
-}
+};

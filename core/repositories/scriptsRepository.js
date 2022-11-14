@@ -1,6 +1,6 @@
-import { ScriptSchema } from '../../infra/databases/mongodb/schemas';
+const ScriptSchema = require('../../infra/databases/mongodb/schemas/ScriptSchema');
 
-export default class ScriptsRepository {
+class ScriptsRepository {
   constructor({ connection }) {
     this.connection = connection;
   }
@@ -25,3 +25,5 @@ export default class ScriptsRepository {
     return stages;
   }
 }
+
+module.exports = ScriptsRepository;

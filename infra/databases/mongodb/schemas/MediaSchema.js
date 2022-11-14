@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+const { Schema } = require('mongoose');
 
 const Media = new Schema({
   _id: {
@@ -17,4 +17,4 @@ const Media = new Schema({
   },
 });
 
-export default Media;
+module.exports = Media;

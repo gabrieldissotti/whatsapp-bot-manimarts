@@ -1,8 +1,8 @@
-import { Schema } from 'mongoose';
-import {
+const { Schema } = require('mongoose');
+const {
   DEFAULT_SCRIPT_VERSION,
   DEFAULT_SCRIPT_POSITION,
-} from '../../../../core/constants/scripts';
+} = require('../../../../core/constants/scripts');
 
 const Lead = new Schema(
   {
@@ -27,4 +27,4 @@ const Lead = new Schema(
   { collection: 'leads' }
 );
 
-export default Lead;
+module.exports = Lead;

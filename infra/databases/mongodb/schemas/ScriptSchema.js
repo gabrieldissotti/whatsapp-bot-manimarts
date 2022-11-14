@@ -1,6 +1,8 @@
-import { Schema } from 'mongoose';
-import { DEFAULT_SCRIPT_VERSION } from '../../../../core/constants/scripts';
-import StageSchema from './StageSchema';
+const { Schema } = require('mongoose');
+const {
+  DEFAULT_SCRIPT_VERSION,
+} = require('../../../../core/constants/scripts');
+const StageSchema = require('./StageSchema');
 
 const Script = new Schema(
   {
@@ -19,4 +21,4 @@ const Script = new Schema(
   { collection: 'scripts' }
 );
 
-export default Script;
+module.exports = Script;

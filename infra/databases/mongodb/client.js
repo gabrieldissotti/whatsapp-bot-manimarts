@@ -1,11 +1,3 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-import getConfig from 'next/config';
-
-const {
-  serverRuntimeConfig: {
-    database: { mongodbDSN },
-  },
-} = getConfig();
-
-export default mongoose.connect(mongodbDSN);
+module.exports.getConnection = () => mongoose.connect(process.env.MONGODB_DSN);

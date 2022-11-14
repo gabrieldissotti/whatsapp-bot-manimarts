@@ -8,4 +8,4 @@ const audios = [
   '7_vou_segurar_uma_vaga_pra_vc',
 ];
 
-export default audios;
+module.exports = audios;

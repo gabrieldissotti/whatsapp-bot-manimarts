@@ -1,6 +1,6 @@
-import { LeadSchema } from '../../infra/databases/mongodb/schemas';
+const LeadSchema = require('../../infra/databases/mongodb/schemas/LeadSchema');
 
-export default class LeadsRepository {
+class LeadsRepository {
   constructor({ connection }) {
     this.connection = connection;
   }
@@ -51,3 +51,5 @@ export default class LeadsRepository {
     await LeadModel.updateOne(query, { $set: payload });
   }
 }
+
+module.exports = LeadsRepository;

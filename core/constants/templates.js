@@ -1,3 +1,3 @@
 const templates = ['boas_vindas'];
 
-export default templates;
+module.exports = templates;
