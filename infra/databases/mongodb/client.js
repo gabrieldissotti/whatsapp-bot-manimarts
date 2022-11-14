@@ -48,7 +48,4 @@ async function getConnection() {
   return cached.conn;
 }
 
-// start before first request
-getConnection();
-
 module.exports.getConnection = getConnection;
