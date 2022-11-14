@@ -45,6 +45,11 @@ class LeadsService {
         nextStage = scriptStages.find(
           (stage) => stage.position === lead.stage_position + 1
         );
+
+        if (nextStage.position > scriptStages.length) {
+          logger.info('Script ends, skipping message webhook');
+          return;
+        }
       }
       logger
         .child({ actualStage: nextStage.position })
