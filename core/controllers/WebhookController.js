@@ -1,14 +1,15 @@
 /* eslint-disable class-methods-use-this */
 
 class WebhookController {
-  constructor({ leadsService, authService }) {
+  constructor({ leadsService, authService, logger }) {
     this.leadsService = leadsService;
     this.authService = authService;
+    this.logger = logger;
   }
 
   async handleReplayLead(req, res) {
     try {
-      console.log('REQUEST PAYLOAD:', JSON.stringify(req.body));
+      this.logger.child({ body: req.body }).info('request payload');
 
       if (!req.body?.object) {
         return res.status(404).json({ error: 'req.body?.object not present' });
@@ -43,7 +44,7 @@ class WebhookController {
   }
 
   handleVerifyWebhook(req, res) {
-    console.log('REQUEST PAYLOAD:', JSON.stringify(req.query));
+    this.logger.child({ query: req.query }).info('request payload');
 
     const mode = req.query['hub.mode'];
     const token = req.query['hub.verify_token'];

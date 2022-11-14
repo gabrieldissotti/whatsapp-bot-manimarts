@@ -10,7 +10,7 @@ const nextConfig = {
     },
     filesBaseURL: process.env.FILES_BASE_URL,
     database: {
-      mongodbDSN: process.env.MONGODB_DSN,
+      mongodbDSN: process.env.MONGODB_URI,
     },
   },
 };

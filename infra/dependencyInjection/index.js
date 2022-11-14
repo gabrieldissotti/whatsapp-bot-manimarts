@@ -5,6 +5,7 @@ const LeadsService = require('../../core/services/LeadsService');
 const AuthService = require('../../core/services/AuthService');
 const WhatsAppBusinessCloudAPI = require('../apis/WhatsAppBusinessCloudAPI');
 const mongoDbClient = require('../databases/mongodb/client');
+const logger = require('../logger/pino');
 
 const connection = mongoDbClient.getConnection();
 
@@ -16,6 +17,7 @@ const leadsService = new LeadsService({
   leadsRepository,
   scriptsRepository,
   whatsAppBusinessCloudAPI,
+  logger,
 });
 
 const authService = new AuthService({
@@ -24,5 +26,9 @@ const authService = new AuthService({
 });
 
 module.exports = {
-  webhookController: new WebhookController({ leadsService, authService }),
+  webhookController: new WebhookController({
+    leadsService,
+    authService,
+    logger,
+  }),
 };
