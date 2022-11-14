@@ -20,7 +20,9 @@ class LeadsService {
     try {
       let lead = await this.leadsRepository.getLead(recipientPhoneNumber);
       let isFirstContact = false;
-      if (!lead) {
+      if (lead) {
+        logger.info('lead found');
+      } else {
         logger.info('lead not found');
         isFirstContact = true;
         lead = this.leadsRepository.createLead({
