@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node ./core/server.js --inspect",
-    "build": "next build",
-    "start": "NODE_ENV=production node ./core/server.js",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
+    "build": "yarn setup && next build",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
