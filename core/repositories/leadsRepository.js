@@ -21,19 +21,6 @@ class LeadsRepository extends AppRepository {
     return result.toObject();
   }
 
-  async getAllLockedLeads() {
-    const LeadModel = await this.getModel();
-
-    const result = await LeadModel.find({
-      locked_in_this_stage_until: { $not: null },
-    });
-    if (!result?.length) {
-      return null;
-    }
-
-    return result?.map((doc) => doc.toObject()) || [];
-  }
-
   async createLead({ phoneNumber, name, stagePosition }) {
     const LeadModel = await this.getModel();
 
@@ -52,7 +39,7 @@ class LeadsRepository extends AppRepository {
   async updateLead({
     phoneNumber,
     stagePosition,
-    isLockedInThisStageUntil,
+    isLockedInThisStage,
     receivedSomeImageSoFar,
   }) {
     const LeadModel = await this.getModel();
@@ -66,8 +53,8 @@ class LeadsRepository extends AppRepository {
 
     if (isDefined(stagePosition)) $set.stage_position = stagePosition;
 
-    if (isDefined(isLockedInThisStageUntil))
-      $set.locked_in_this_stage_until = isLockedInThisStageUntil;
+    if (isDefined(isLockedInThisStage))
+      $set.locked_in_this_stage = isLockedInThisStage;
 
     if (isDefined(receivedSomeImageSoFar))
       $set.received_some_image_so_far = receivedSomeImageSoFar;
@@ -75,12 +62,12 @@ class LeadsRepository extends AppRepository {
     await LeadModel.updateOne(query, { $set });
   }
 
-  async lockLead({ phoneNumber, until }) {
+  async lockLead({ phoneNumber }) {
     const LeadModel = await this.getModel();
 
     const query = { phoneNumber };
     const $set = {
-      locked_in_this_stage_until: until,
+      locked_in_this_stage: true,
     };
 
     await LeadModel.updateOne(query, { $set });
@@ -91,7 +78,7 @@ class LeadsRepository extends AppRepository {
 
     const query = { phoneNumber };
     const $set = {
-      locked_in_this_stage_until: null,
+      locked_in_this_stage: false,
     };
 
     await LeadModel.updateOne(query, { $set });

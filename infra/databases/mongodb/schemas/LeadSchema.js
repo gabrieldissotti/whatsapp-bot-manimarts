@@ -23,9 +23,9 @@ const Lead = new Schema(
     },
     createdAt: Date,
     stage_id: Number,
-    locked_in_this_stage_until: {
-      type: Date,
-      default: null,
+    locked_in_this_stage: {
+      type: Boolean,
+      default: false,
     },
     received_some_image_so_far: {
       type: Boolean,

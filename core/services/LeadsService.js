@@ -54,23 +54,22 @@ class LeadsService {
         .child({ totalStages: scriptStages.length })
         .info('script stages found');
 
-      const lockedUntil = new Date(lead.locked_in_this_stage_until);
-      const now = new Date();
       const messageIsAnImage = messagesGiven[0]?.type === 'image';
 
-      if (lead.locked_in_this_stage_until && lockedUntil > now) {
-        if (!messageIsAnImage) {
-          logger
-            .child({ totalStages: scriptStages.length })
-            .info('lead locked in this stage, skipping');
-          return;
+      if (lead.locked_in_this_stage) {
+        if (!lead.received_some_image_so_far && messageIsAnImage) {
+          logger.info(
+            'first image given from lead, saving this in lead document'
+          );
+          await this.leadsRepository.updateLead({
+            phoneNumber: recipientPhoneNumber,
+            receivedSomeImageSoFar:
+              lead.received_some_image_so_far || messageIsAnImage,
+          });
         }
 
-        logger
-          .child({ totalStages: scriptStages.length })
-          .info(
-            'lead will be unlocked from this stage and flagged with image given tag when reply lead service be finished'
-          );
+        logger.info('lead locked in this stage, skipping');
+        return;
       }
 
       let nextStage = scriptStages[0];
@@ -123,7 +122,7 @@ class LeadsService {
         phoneNumber: recipientPhoneNumber,
         stagePosition: nextStage.position,
         receivedSomeImageSoFar:
-          messageIsAnImage && !lead.received_some_image_so_far,
+          lead.received_some_image_so_far || messageIsAnImage,
       });
       logger.info('lead stage updated successfully');
     } catch (error) {
