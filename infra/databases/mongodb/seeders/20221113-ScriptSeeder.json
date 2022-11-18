@@ -25,7 +25,7 @@
             "_id": {
               "$oid": "6370f491d8e44b59caf20b92"
             },
-            "url": "/audio/1_salvei_seu_contato.ogg",
+            "url": "1_salvei_seu_contato.ogg",
             "type": "audio"
           }
         ]
@@ -45,7 +45,7 @@
             "_id": {
               "$oid": "6370f42117ee21bad02cc86d"
             },
-            "url": "/audio/2_voce_tem_foto_de_algum.ogg",
+            "url": "2_voce_tem_foto_de_algum.ogg",
             "type": "audio"
           }
         ]
@@ -65,7 +65,7 @@
             "_id": {
               "$oid": "6370f42bcca7fb5616e898ce"
             },
-            "url": "/audio/3_a_que_legal_posso_mandar_uns_meus.ogg",
+            "url": "3_a_que_legal_posso_mandar_uns_meus.ogg",
             "type": "audio"
           }
         ]
@@ -81,7 +81,7 @@
                 "_id": {
                   "$oid": "6370f42bcca7fb5616e898ce"
                 },
-                "url": "/audio/3_a_nao_tudo_bem_posso_mandar_uns_meus.ogg",
+                "url": "3_a_nao_tudo_bem_posso_mandar_uns_meus.ogg",
                 "type": "audio"
               }
             ]
@@ -99,7 +99,7 @@
             "_id": {
               "$oid": "6370f43ad488cb9e4a415c31"
             },
-            "url": "/audio/4_mas_eai_vc_tem_vontade_de_aprender.ogg",
+            "url": "4_mas_eai_vc_tem_vontade_de_aprender.ogg",
             "type": "audio"
           }
         ]
@@ -119,7 +119,7 @@
             "_id": {
               "$oid": "6370f44ddc18fd899aeb96fe"
             },
-            "url": "/audio/5_se_vc_realmente_quer_criei_um_treinamento.ogg",
+            "url": "5_se_vc_realmente_quer_criei_um_treinamento.ogg",
             "type": "audio"
           }
         ]
@@ -139,7 +139,7 @@
             "_id": {
               "$oid": "6370f45e5dd9d51e8eb5e6c0"
             },
-            "url": "/audio/6_pra_vc_participar_faca_a_inscricao.ogg",
+            "url": "6_pra_vc_participar_faca_a_inscricao.ogg",
             "type": "audio"
           }
         ]
@@ -159,7 +159,7 @@
             "_id": {
               "$oid": "6370f46b71c6525e92f5fbd2"
             },
-            "url": "/audio/7_vou_segurar_uma_vaga_pra_vc.ogg",
+            "url": "7_vou_segurar_uma_vaga_pra_vc.ogg",
             "type": "audio"
           }
         ]

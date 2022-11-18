@@ -1,7 +1,7 @@
 const getConfig = require('next/config');
 const axios = require('axios');
 
-module.exports = class WhatsAppBusinessCloudAPI {
+class WhatsAppBusinessCloudAPI {
   constructor() {
     this.filesBaseURL = null;
     this.defaultFields = {
@@ -72,11 +72,12 @@ module.exports = class WhatsAppBusinessCloudAPI {
         to: recipientPhoneNumber,
         type: 'audio',
         audio: {
-          link: `${this.getFilesBaseURL()}/${audio}`,
+          link: `${this.getFilesBaseURL()}/audio/${audio}`,
         },
       });
     } catch (error) {
       throw new Error('failed on send audio message');
     }
   }
-};
+}
+module.exports = WhatsAppBusinessCloudAPI;

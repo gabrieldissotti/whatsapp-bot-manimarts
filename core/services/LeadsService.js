@@ -153,7 +153,7 @@ class LeadsService {
         .child({ totalStages: scriptStages.length })
         .info('script stages found');
 
-      messages.forEach(
+      const promises = messages?.map(
         async ({ _id, message: { lead_phone_number, next_stage_id } }) => {
           const stage = scriptStages.find(
             (scriptStage) =>
@@ -191,7 +191,21 @@ class LeadsService {
         }
       );
 
-      logger.info('all leads replied successfully');
+      const results = await Promise.allSettled(promises);
+      const errors = [];
+      results.forEach((result) => {
+        if (result === 'rejected') {
+          errors.push(result);
+        }
+      });
+
+      if (errors.length === promises?.length) {
+        logger.error('occurs errors on send all messages');
+      } else if (errors.length > 0) {
+        logger.warn('some lead was not replied');
+      } else {
+        logger.info('all leads replied successfully');
+      }
     } catch (error) {
       logger.child({ error }).error('error on reply lead');
 
@@ -234,7 +248,7 @@ class LeadsService {
     if (!message?.medias?.length) {
       logger.info('no media to send in this stage');
     } else {
-      nextStage.message.medias.map(async ({ type, url }) => {
+      const promises = nextStage.message.medias.map(async ({ type, url }) => {
         logger.child({ type, url }).info('sending media');
         switch (type) {
           case 'audio':
@@ -249,6 +263,22 @@ class LeadsService {
         }
         logger.child({ type, url }).info('media sent successfully');
       });
+
+      const results = await Promise.allSettled(promises);
+      const errors = [];
+      results.forEach((result) => {
+        if (result === 'rejected') {
+          errors.push(result);
+        }
+      });
+
+      if (errors.length === promises.length) {
+        logger.child({ errors }).error('occurs errors on send all audios');
+      } else if (errors.length > 0) {
+        logger.child({ errors }).warn('some audios was not sent');
+      } else {
+        logger.child({ results }).info('all audios was sent successfully');
+      }
     }
   }
 }
