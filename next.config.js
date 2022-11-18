@@ -8,6 +8,7 @@ const nextConfig = {
       accessToken: process.env.GRAPH_FACEBOOK_ACCESS_TOKEN,
       webhookAccessToken: process.env.GRAPH_FACEBOOK_WEBHOOK_ACCESS_TOKEN,
     },
+    callMyAppToken: process.env.CALLMYAPP_TOKEN,
     filesBaseURL: process.env.FILES_BASE_URL,
     database: {
       mongodbDSN: process.env.MONGODB_URI,

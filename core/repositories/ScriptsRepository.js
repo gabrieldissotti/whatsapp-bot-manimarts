@@ -1,19 +1,15 @@
-const ScriptSchema = require('../../infra/databases/mongodb/schemas/ScriptSchema');
+const AppRepository = require('./AppRepository');
 
-class ScriptsRepository {
-  constructor({ connection }) {
-    this.connection = connection;
-  }
-
-  async getScriptModel() {
-    const db = await this.connection;
-    const ScriptModel = db.model('Script', ScriptSchema);
-
-    return ScriptModel;
+class ScriptsRepository extends AppRepository {
+  constructor({ connection, model }) {
+    super({
+      connection,
+      model,
+    });
   }
 
   async getStages() {
-    const ScriptModel = await this.getScriptModel();
+    const ScriptModel = await this.getModel();
 
     const result = await ScriptModel.findOne();
     if (!result) {

@@ -18,6 +18,18 @@ class AuthService {
 
     this.isTokenValid = true;
   }
+
+  async verifyCallMyAppToken(token) {
+    const {
+      serverRuntimeConfig: { callMyAppToken },
+    } = getConfig();
+
+    if (token !== callMyAppToken) {
+      throw new Error('invalid token');
+    }
+
+    this.isTokenValid = true;
+  }
 }
 
 module.exports = AuthService;

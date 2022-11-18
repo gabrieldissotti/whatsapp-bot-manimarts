@@ -23,6 +23,14 @@ const Lead = new Schema(
     },
     createdAt: Date,
     stage_id: Number,
+    locked_in_this_stage_until: {
+      type: Date,
+      default: null,
+    },
+    received_some_image_so_far: {
+      type: Boolean,
+      default: false,
+    },
   },
   { collection: 'leads' }
 );

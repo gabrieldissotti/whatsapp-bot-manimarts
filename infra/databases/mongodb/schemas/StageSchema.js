@@ -16,6 +16,17 @@ const Stage = new Schema({
     type: Number,
     required: true,
   },
+  rules: {
+    should_wait_seconds_to_reply: Number,
+    alternative_message: {
+      condition: String,
+      message: {
+        medias: [MediaSchema],
+        text: String,
+        template: String,
+      },
+    },
+  },
 });
 
 module.exports = Stage;

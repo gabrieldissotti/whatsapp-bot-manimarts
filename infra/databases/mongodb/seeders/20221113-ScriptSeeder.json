@@ -10,7 +10,10 @@
       "message": {
         "template": "boas_vindas"
       },
-      "position": 0
+      "position": 0,
+      "rules": {
+        "should_wait_seconds_to_reply": 0
+      }
     },
     {
       "_id": {
@@ -27,7 +30,10 @@
           }
         ]
       },
-      "position": 1
+      "position": 1,
+      "rules": {
+        "should_wait_seconds_to_reply": 10
+      }
     },
     {
       "_id": {
@@ -44,7 +50,10 @@
           }
         ]
       },
-      "position": 2
+      "position": 2,
+      "rules": {
+        "should_wait_seconds_to_reply": 5
+      }
     },
     {
       "_id": {
@@ -56,12 +65,29 @@
             "_id": {
               "$oid": "6370f42bcca7fb5616e898ce"
             },
-            "url": "/audio/3_a_nao_tudo_bem_posso_mandar_uns_meus.ogg",
+            "url": "/audio/3_a_que_legal_posso_mandar_uns_meus.ogg",
             "type": "audio"
           }
         ]
       },
-      "position": 3
+      "position": 3,
+      "rules": {
+        "should_wait_seconds_to_reply": 13,
+        "alternative_message": {
+          "condition": "mustHaveReceivedAnyPictureMessagesByNow",
+          "message": {
+            "medias": [
+              {
+                "_id": {
+                  "$oid": "6370f42bcca7fb5616e898ce"
+                },
+                "url": "/audio/3_a_nao_tudo_bem_posso_mandar_uns_meus.ogg",
+                "type": "audio"
+              }
+            ]
+          }
+        }
+      }
     },
     {
       "_id": {
@@ -78,7 +104,10 @@
           }
         ]
       },
-      "position": 4
+      "position": 4,
+      "rules": {
+        "should_wait_seconds_to_reply": 5
+      }
     },
     {
       "_id": {
@@ -95,7 +124,10 @@
           }
         ]
       },
-      "position": 5
+      "position": 5,
+      "rules": {
+        "should_wait_seconds_to_reply": 81
+      }
     },
     {
       "_id": {
@@ -112,7 +144,10 @@
           }
         ]
       },
-      "position": 6
+      "position": 6,
+      "rules": {
+        "should_wait_seconds_to_reply": 85
+      }
     },
     {
       "_id": {
@@ -129,7 +164,10 @@
           }
         ]
       },
-      "position": 7
+      "position": 7,
+      "rules": {
+        "should_wait_seconds_to_reply": 20
+      }
     }
   ],
   "createdAt": "2022-11-13T14:15:16.401Z"
