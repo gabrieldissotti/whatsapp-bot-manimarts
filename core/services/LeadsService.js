@@ -185,8 +185,7 @@ class LeadsService {
           await this.leadsRepository.updateLead({
             phoneNumber: lead_phone_number,
             stagePosition: stage.position,
-            receivedSomeImageSoFar: null,
-            isLockedInThisStageUntil: null,
+            isLockedInThisStage: false,
           });
           logger.info('lead stage updated successfully');
         }
