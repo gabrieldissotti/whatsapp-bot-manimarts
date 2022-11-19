@@ -274,6 +274,7 @@ class LeadsService {
 
       if (errors.length === promises.length) {
         logger.child({ errors }).error('occurs errors on send all audios');
+        throw new Error('error on send all audios');
       } else if (errors.length > 0) {
         logger.child({ errors }).warn('some audios was not sent');
       } else {
