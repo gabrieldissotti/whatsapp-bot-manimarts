@@ -23,4 +23,8 @@ const Queue = new Schema(
   { collection: 'queue', timestamps: true }
 );
 
+const anHourInSeconds = 3600;
+
+Queue.index({ createdAt: new Date() }, { expireAfterSeconds: anHourInSeconds });
+
 module.exports = Queue;
