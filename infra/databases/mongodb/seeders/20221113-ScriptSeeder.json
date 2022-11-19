@@ -91,6 +91,96 @@
     },
     {
       "_id": {
+        "$oid": "6370f43700314d91ac5c05cb"
+      },
+      "message": {
+        "medias": [
+          {
+            "_id": {
+              "$oid": "6370f43ad488cb9e4a411231"
+            },
+            "url": "WhatsApp Image 2022-11-06 at 12.43.48.jpeg",
+            "type": "image"
+          },
+          {
+            "_id": {
+              "$oid": "1170f43ad488cb9e4a411231"
+            },
+            "url": "WhatsApp Image 2022-11-06 at 12.43.49 (1).jpeg",
+            "type": "image"
+          },
+          {
+            "_id": {
+              "$oid": "1270f43ad488cb9e4a411231"
+            },
+            "url": "WhatsApp Image 2022-11-06 at 12.43.49 (2).jpeg",
+            "type": "image"
+          },
+          {
+            "_id": {
+              "$oid": "1370f43ad488cb9e4a411231"
+            },
+            "url": "WhatsApp Image 2022-11-06 at 12.43.49 (3).jpeg",
+            "type": "image"
+          },
+          {
+            "_id": {
+              "$oid": "1470f43ad488cb9e4a411231"
+            },
+            "url": "WhatsApp Image 2022-11-06 at 12.43.49.jpeg",
+            "type": "image"
+          },
+          {
+            "_id": {
+              "$oid": "1570f43ad488cb9e4a411231"
+            },
+            "url": "WhatsApp Image 2022-11-06 at 12.43.50 (1).jpeg",
+            "type": "image"
+          },
+          {
+            "_id": {
+              "$oid": "1670f43ad488cb9e4a411231"
+            },
+            "url": "WhatsApp Image 2022-11-06 at 12.43.50 (2).jpeg",
+            "type": "image"
+          },
+          {
+            "_id": {
+              "$oid": "1770f43ad488cb9e4a411231"
+            },
+            "url": "WhatsApp Image 2022-11-06 at 12.43.50 (3).jpeg",
+            "type": "image"
+          },
+          {
+            "_id": {
+              "$oid": "1870f43ad488cb9e4a411231"
+            },
+            "url": "WhatsApp Image 2022-11-06 at 12.43.50.jpeg",
+            "type": "image"
+          },
+          {
+            "_id": {
+              "$oid": "1970f43ad488cb9e4a411231"
+            },
+            "url": "WhatsApp Image 2022-11-06 at 12.43.51 (1).jpeg",
+            "type": "image"
+          },
+          {
+            "_id": {
+              "$oid": "2070f43ad488cb9e4a411231"
+            },
+            "url": "WhatsApp Image 2022-11-06 at 12.43.51.jpeg",
+            "type": "image"
+          }
+        ]
+      },
+      "position": 4,
+      "rules": {
+        "should_wait_seconds_to_reply": 5
+      }
+    },
+    {
+      "_id": {
         "$oid": "6370f43700418d91ac5c05cb"
       },
       "message": {
@@ -104,7 +194,7 @@
           }
         ]
       },
-      "position": 4,
+      "position": 5,
       "rules": {
         "should_wait_seconds_to_reply": 5
       }
@@ -124,7 +214,7 @@
           }
         ]
       },
-      "position": 5,
+      "position": 6,
       "rules": {
         "should_wait_seconds_to_reply": 81
       }
@@ -144,7 +234,7 @@
           }
         ]
       },
-      "position": 6,
+      "position": 7,
       "rules": {
         "should_wait_seconds_to_reply": 85
       }
@@ -164,7 +254,7 @@
           }
         ]
       },
-      "position": 7,
+      "position": 8,
       "rules": {
         "should_wait_seconds_to_reply": 20
       }

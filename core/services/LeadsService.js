@@ -285,6 +285,12 @@ class LeadsService {
               url
             );
             break;
+          case 'image':
+            await this.whatsAppBusinessCloudAPI.sendImageMessage(
+              recipientPhoneNumber,
+              url
+            );
+            break;
 
           default:
             break;

@@ -79,5 +79,22 @@ class WhatsAppBusinessCloudAPI {
       throw new Error('failed on send audio message');
     }
   }
+
+  async sendImageMessage(recipientPhoneNumber, image) {
+    try {
+      const httpClient = this.getHttpClient();
+
+      await httpClient.post('/messages', {
+        ...this.defaultFields,
+        to: recipientPhoneNumber,
+        type: 'image',
+        image: {
+          link: `${this.getFilesBaseURL()}/images/${image}`,
+        },
+      });
+    } catch (error) {
+      throw new Error('failed on send audio message');
+    }
+  }
 }
 module.exports = WhatsAppBusinessCloudAPI;
