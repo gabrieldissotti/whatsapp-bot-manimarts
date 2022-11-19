@@ -227,12 +227,17 @@ class LeadsService {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  async getMessageFromStage({ stage, logger, lead }) {
+  getMessageFromStage({ stage, logger, lead }) {
     let message = stage?.message;
 
     switch (stage?.rules?.alternative_message?.condition) {
       case 'mustHaveReceivedAnyPictureMessagesByNow':
         if (!lead.received_some_image_so_far) {
+          logger
+            .child({ message })
+            .info(
+              'using default stage message because user does not sent some image yet'
+            );
           break;
         }
 
