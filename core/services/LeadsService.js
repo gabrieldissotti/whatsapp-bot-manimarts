@@ -220,7 +220,7 @@ class LeadsService {
       nextStage?.rules?.alternative_message?.condition ===
       'mustHaveReceivedAnyPictureMessagesByNow'
     ) {
-      message = nextStage?.rules?.alternative_message;
+      message = nextStage.rules.alternative_message.message;
       logger
         .child({ message })
         .info(
@@ -234,21 +234,21 @@ class LeadsService {
       logger.info('no message by template to send in this stage');
     } else {
       logger
-        .child({ template: nextStage.message.template })
+        .child({ template: message.template })
         .info('sending message by template');
       await this.whatsAppBusinessCloudAPI.sendMessageByTemplate(
-        nextStage.message.template,
+        message.template,
         recipientPhoneNumber
       );
       logger
-        .child({ template: nextStage.message.template })
+        .child({ template: message.template })
         .info('message by template sent successfully');
     }
 
     if (!message?.medias?.length) {
       logger.info('no media to send in this stage');
     } else {
-      const promises = nextStage.message.medias.map(async ({ type, url }) => {
+      const promises = message.medias.map(async ({ type, url }) => {
         logger.child({ type, url }).info('sending media');
         switch (type) {
           case 'audio':
