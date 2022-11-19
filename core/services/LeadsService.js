@@ -113,7 +113,12 @@ class LeadsService {
           'added message in queue to be sent to lead after waiting time is completed'
         );
       } else {
-        await this.sendMessage({ nextStage, logger, recipientPhoneNumber });
+        const message = this.getMessageFromStage({
+          lead,
+          stage: nextStage,
+          logger,
+        });
+        await this.sendMessage({ message, logger, recipientPhoneNumber });
         logger.info('lead replied successfully');
       }
 
@@ -169,8 +174,16 @@ class LeadsService {
             phoneNumber: lead_phone_number,
           });
 
+          const lead = await this.leadsRepository.getLead(lead_phone_number);
+
+          const message = this.getMessageFromStage({
+            lead,
+            stage,
+            logger: loggerWithPhoneNumber,
+          });
+
           await this.sendMessage({
-            nextStage: stage,
+            message,
             logger: loggerWithPhoneNumber,
             recipientPhoneNumber: lead_phone_number,
           });
@@ -213,23 +226,33 @@ class LeadsService {
     }
   }
 
-  async sendMessage({ nextStage, logger, recipientPhoneNumber }) {
-    let message = nextStage?.message;
+  // eslint-disable-next-line class-methods-use-this
+  async getMessageFromStage({ stage, logger, lead }) {
+    let message = stage?.message;
 
-    if (
-      nextStage?.rules?.alternative_message?.condition ===
-      'mustHaveReceivedAnyPictureMessagesByNow'
-    ) {
-      message = nextStage.rules.alternative_message.message;
-      logger
-        .child({ message })
-        .info(
-          'using alternative stage message because next stage have a satisfied condition'
-        );
-    } else {
-      logger.child({ message }).info('using default stage message');
+    switch (stage?.rules?.alternative_message?.condition) {
+      case 'mustHaveReceivedAnyPictureMessagesByNow':
+        if (!lead.received_some_image_so_far) {
+          break;
+        }
+
+        message = stage.rules.alternative_message.message;
+        logger
+          .child({ message })
+          .info(
+            'using alternative stage message because next stage have a satisfied condition'
+          );
+        break;
+
+      default:
+        logger.child({ message }).info('using default stage message');
+        break;
     }
 
+    return message;
+  }
+
+  async sendMessage({ message, logger, recipientPhoneNumber }) {
     if (!message?.template) {
       logger.info('no message by template to send in this stage');
     } else {
