@@ -65,14 +65,14 @@
             "_id": {
               "$oid": "6370f42bcca7fb5616e898ce"
             },
-            "url": "3_a_que_legal_posso_mandar_uns_meus.ogg",
+            "url": "3_a_nao_tudo_bem_posso_mandar_uns_meus.ogg",
             "type": "audio"
           }
         ]
       },
       "position": 3,
       "rules": {
-        "should_wait_seconds_to_reply": 13,
+        "should_wait_seconds_to_reply": 60,
         "alternative_message": {
           "condition": "mustHaveReceivedAnyPictureMessagesByNow",
           "message": {
@@ -81,7 +81,7 @@
                 "_id": {
                   "$oid": "6370f42bcca7fb5616e898ce"
                 },
-                "url": "3_a_nao_tudo_bem_posso_mandar_uns_meus.ogg",
+                "url": "3_a_que_legal_posso_mandar_uns_meus.ogg",
                 "type": "audio"
               }
             ]
