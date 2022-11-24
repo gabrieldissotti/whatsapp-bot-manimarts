@@ -63,6 +63,25 @@ class WhatsAppBusinessCloudAPI {
     }
   }
 
+  async sendTextMessage(text, recipientPhoneNumber) {
+    try {
+      const httpClient = this.getHttpClient();
+
+      const response = await httpClient.post('/messages', {
+        ...this.defaultFields,
+        to: recipientPhoneNumber,
+        type: 'text',
+        text: {
+          body: text,
+        },
+      });
+
+      return response;
+    } catch (error) {
+      throw new Error('failed on send message by template');
+    }
+  }
+
   async sendAudioMessage(recipientPhoneNumber, audio) {
     try {
       const httpClient = this.getHttpClient();

@@ -273,6 +273,19 @@ class LeadsService {
         .info('message by template sent successfully');
     }
 
+    if (!message?.text) {
+      logger.info('no text message to send in this stage');
+    } else {
+      logger.child({ text: message?.text }).info('sending message by template');
+      await this.whatsAppBusinessCloudAPI.sendTextMessage(
+        message.text,
+        recipientPhoneNumber
+      );
+      logger
+        .child({ template: message.template })
+        .info('text message sent successfully');
+    }
+
     if (!message?.medias?.length) {
       logger.info('no media to send in this stage');
     } else {
